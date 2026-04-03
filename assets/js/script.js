@@ -52,6 +52,55 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
     }
 
+    // Direction Toggle (LTR/RTL)
+    const dirToggle = document.querySelectorAll('.direction-toggle');
+    
+    // Initial direction check
+    const savedDir = localStorage.getItem('direction') || 'ltr';
+    htmlElement.setAttribute('dir', savedDir);
+    updateDirIcons(savedDir);
+
+    if (dirToggle.length > 0) {
+        dirToggle.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currentDir = htmlElement.getAttribute('dir') || 'ltr';
+                const newDir = currentDir === 'rtl' ? 'ltr' : 'rtl';
+                htmlElement.setAttribute('dir', newDir);
+                localStorage.setItem('direction', newDir);
+                updateDirIcons(newDir);
+            });
+        });
+    }
+
+    function updateDirIcons(dir) {
+        dirToggle.forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) {
+                // We use 'languages' as a generic RTL icon, or could toggle based on state
+                icon.setAttribute('data-lucide', 'languages');
+            }
+        });
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+
+    // Password Visibility Toggle
+    const passwordToggles = document.querySelectorAll('.password-toggle');
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const input = toggle.parentElement.querySelector('input');
+            const icon = toggle.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                input.type = 'password';
+                icon.setAttribute('data-lucide', 'eye');
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    });
+
     // Initialize Lucide Icons
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();

@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found | K9 Mastery</title>
+    <title>404 Not Found | PawTrain</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh;">
-    <nav class="navbar">... <!-- nav --></nav>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="brand"><i data-lucide="shield-check"></i> PawTrain</a>
+            <ul class="nav-links">
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link">Home <i data-lucide="chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html" class="dropdown-item">Home 1</a></li>
+                        <li><a href="index-2.html" class="dropdown-item">Home 2</a></li>
+                    </ul>
+                </li>
+                <li><a href="programs.html" class="nav-link">Programs</a></li>
+                <li><a href="success-stories.html" class="nav-link">Success Stories</a></li>
+                <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
 
+                <li class="mobile-only" style="margin-top: 1.5rem; width: 100%;">
+                    <a href="login.html" class="btn btn-primary" style="width: 100%; color: white;">Client Dashboard</a>
+                </li>
+            </ul>
+            <div class="nav-actions">
+                <button class="direction-toggle"><i data-lucide="languages"></i></button>
+                <button class="theme-toggle"><i data-lucide="moon"></i></button>
+                <a href="login.html" class="btn btn-primary">Client Dashboard</a>
+                <button class="mobile-menu-btn"><i data-lucide="menu"></i></button>
+            </div>
+        </div>
+    </nav>
     <section class="section" style="flex-grow: 1; display: flex; align-items: center; justify-content: center; text-align: center; padding-top: 6rem;">
         <div class="container">
             <i data-lucide="map-pin-off" style="width: 64px; height: 64px; color: var(--text-muted); margin-bottom: 2rem;"></i>
@@ -20,8 +47,57 @@
             <a href="index.html" class="btn btn-primary"><i data-lucide="home"></i> Back to Home</a>
         </div>
     </section>
-
-    <footer class="footer">...</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="brand" style="margin-bottom: 1rem;">
+                        <i data-lucide="shield-check"></i> PawTrain
+                    </a>
+                    <p style="font-size: 0.95rem;">Premium dog training facility specializing in behavior modification and real-world obedience.</p>
+                    <div class="social-links" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                        <a href="#" class="social-link" title="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link" title="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" title="X (Modern Twitter)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.464 -2.464l6.768 -6.768"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Programs</h4>
+                    <ul>
+                        <li><a href="programs.html">Board & Train</a></li>
+                        <li><a href="programs.html#day-train">Day Training</a></li>
+                        <li><a href="programs.html#puppy">Puppy Camp</a></li>
+                        <li><a href="pricing.html">View Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="success-stories.html">Success Stories</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Client Portal</h4>
+                    <ul>
+                        <li><a href="login.html">Owner Login</a></li>
+                        <li><a href="login.html">Trainer Portal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PawTrain. All rights reserved. <span style="display:inline-block; margin-left:10px;">Created for demonstration.</span></p>
+            </div>
+        </div>
+    </footer>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+

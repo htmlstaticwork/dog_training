@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner Dashboard | K9 Mastery</title>
+    <title>Owner Dashboard | PawTrain</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,63 +13,64 @@
         .dashboard-layout { display: flex; min-height: 100vh; }
         .sidebar { background: var(--bg-color); width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 50; }
         .main-content { flex: 1; margin-left: 280px; padding: 2rem; max-width: 1200px; }
+        [dir="rtl"] .sidebar { border-right: none; border-left: 1px solid var(--border-color); }
+        [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
         .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; transition: var(--transition); margin-bottom: 0.25rem; }
         .nav-item:hover, .nav-item.active { background: var(--bg-alt); color: var(--primary-color); }
         .stat-card { background: var(--white); padding: 1.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); display: flex; align-items: center; gap: 1rem; }
         .stat-icon { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--bg-alt); color: var(--primary-color); }
         .timeline { border-left: 2px solid var(--border-color); padding-left: 1.5rem; margin-top: 2rem; position: relative; }
+        [dir="rtl"] .timeline { border-left: none; border-right: 2px solid var(--border-color); padding-left: 0; padding-right: 1.5rem; }
         .timeline-item { margin-bottom: 2rem; position: relative; }
         .timeline-item::before { content: ''; position: absolute; left: -29px; top: 0; width: 16px; height: 16px; background: var(--white); border: 2px solid var(--primary-color); border-radius: 50%; }
+        [dir="rtl"] .timeline-item::before { left: auto; right: -29px; }
         @media (max-width: 900px) {
             .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+            [dir="rtl"] .sidebar { transform: translateX(100%); }
             .sidebar.active { transform: translateX(0); }
+            [dir="rtl"] .sidebar.active { transform: translateX(0); }
             .main-content { margin-left: 0; padding: 1rem; }
+            [dir="rtl"] .main-content { margin-right: 0; }
             .dash-header-mobile { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--bg-color); border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; }
         }
     </style>
 </head>
 <body>
-
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <aside class="sidebar">
             <a href="index.html" class="brand" style="margin-bottom: 2.5rem; padding-left: 0.5rem;">
-                <i data-lucide="shield-check"></i> K9 Mastery
+                <i data-lucide="shield-check"></i> PawTrain
             </a>
-            
             <div style="margin-bottom: 2rem; padding: 1rem; background: var(--bg-alt); border-radius: var(--radius-md); text-align: center;">
                 <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=200&auto=format&fit=crop" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem;">
                 <h4 style="margin-bottom: 0;">Rocky</h4>
                 <span class="badge" style="margin-top: 0.5rem; font-size: 0.75rem;">Day 14 of 21</span>
             </div>
-
             <nav style="flex-grow: 1;">
                 <a href="owner-dashboard.html" class="nav-item active"><i data-lucide="layout-dashboard"></i> Overview</a>
                 <a href="dog-progress.html" class="nav-item"><i data-lucide="bar-chart-2"></i> Progress Report</a>
                 <a href="#" class="nav-item"><i data-lucide="image"></i> Photos & Videos</a>
                 <a href="#" class="nav-item"><i data-lucide="message-square"></i> Messages <span style="background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; margin-left: auto;">1</span></a>
             </nav>
-
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                <button class="theme-toggle nav-item" style="width: 100%; text-align: left; background: none; border: none;"><i data-lucide="moon"></i> Toggle Theme</button>
-                <a href="login.html" class="nav-item"><i data-lucide="log-out"></i> Sign Out</a>
+            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
+                <button class="direction-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Direction"><i data-lucide="languages"></i></button>
+                <button class="theme-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Theme"><i data-lucide="moon"></i></button>
+                <a href="login.html" class="nav-item" style="flex: 1; justify-content: center; margin-bottom: 0;" title="Sign Out"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
-
         <!-- Main Content -->
         <main class="main-content">
             <div class="dash-header-mobile" style="display: none;">
-                <a href="index.html" class="brand" style="font-size: 1.25rem;"><i data-lucide="shield-check"></i> K9</a>
+                <a href="index.html" class="brand" style="font-size: 1.25rem;"><i data-lucide="shield-check"></i> PawTrain</a>
                 <button class="mobile-dash-btn" style="color: var(--text-main);"><i data-lucide="menu"></i></button>
             </div>
-
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                 <div>
                     <h1 style="margin-bottom: 0.25rem;">Welcome back, Sarah</h1>
                     <p style="color: var(--text-muted);">Here's your daily update for Rocky.</p>
                 </div>
             </div>
-
             <div class="grid-3" style="gap: 1.5rem; margin-bottom: 2rem;">
                 <div class="stat-card">
                     <div class="stat-icon"><i data-lucide="target"></i></div>
@@ -92,7 +94,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Content Grid -->
             <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
                 <!-- Feed -->
@@ -112,7 +113,6 @@
                         <img src="https://images.unsplash.com/photo-1587300003388-59208cb962cb?q=80&w=800&auto=format&fit=crop" style="width: 100%; border-radius: var(--radius-md); margin-bottom: 1rem; max-height: 300px; object-fit: cover;">
                         <p>Rocky did fantastic placing on his cot today while dogs walked past him. He held duration for 15 minutes straight! His impulse control is improving dramatically.</p>
                     </div>
-                    
                     <div class="card">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -127,7 +127,6 @@
                         <p>We hit the hardware store for some environmental proofing. Rocky didn't pull once, even when a forklift drove by. We are officially dropping the slip lead and moving to flat collar tomorrow.</p>
                     </div>
                 </div>
-
                 <!-- Upcoming & Status -->
                 <div>
                     <h3 style="margin-bottom: 1.5rem;">Milestones</h3>
@@ -147,7 +146,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="card" style="margin-top: 1.5rem; background: var(--primary-color); color: white; border: none;">
                         <h4 style="color: white; margin-bottom: 1rem;"><i data-lucide="calendar" style="vertical-align: middle; margin-right: 0.5rem;"></i> Go-Home Day</h4>
                         <div style="font-size: 2rem; font-weight: 800;">April 15th</div>
@@ -157,7 +155,6 @@
             </div>
         </main>
     </div>
-
     <script>
         // Inline script for specifically dashboard mobile toggle
         document.addEventListener('DOMContentLoaded', () => {
@@ -173,3 +170,4 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+

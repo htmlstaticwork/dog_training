@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Premium Dog Training Board & Train Facility. High-end behavior modification.">
-    <title>K9 Mastery | Premium Board & Train Facility (Design 2)</title>
+    <title>PawTrain | Premium Board & Train Facility (Design 2)</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +16,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .hero-premium {
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1599551468846-95fce23136da?q=80&w=2000&auto=format&fit=crop') center/cover;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('assets/images/hero-home2.jpg') center/cover;
             color: white;
             padding: 8rem 0;
             text-align: center;
@@ -35,35 +36,36 @@
     </style>
 </head>
 <body>
-
     <!-- 1. Perfect Navbar -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="index-2.html" class="brand">
-                <i data-lucide="shield-check"></i> K9 Mastery Premium
-            </a>
-            
+            <a href="index.html" class="brand"><i data-lucide="shield-check"></i> PawTrain</a>
             <ul class="nav-links">
+                <li class="nav-item-dropdown">
+                    <a href="#" class="nav-link">Home <i data-lucide="chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="index.html" class="dropdown-item">Home 1</a></li>
+                        <li><a href="index-2.html" class="dropdown-item">Home 2</a></li>
+                    </ul>
+                </li>
                 <li><a href="programs.html" class="nav-link">Programs</a></li>
                 <li><a href="success-stories.html" class="nav-link">Success Stories</a></li>
-                <li><a href="facility.html" class="nav-link">Facility</a></li>
                 <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-                <li style="margin-top: 1rem;"><a href="login.html" class="btn btn-primary" style="display: none;">Client Login</a></li>
-            </ul>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
 
+                <li class="mobile-only" style="margin-top: 1.5rem; width: 100%;">
+                    <a href="login.html" class="btn btn-primary" style="width: 100%; color: white;">Client Dashboard</a>
+                </li>
+            </ul>
             <div class="nav-actions">
-                <button class="theme-toggle" aria-label="Toggle Dark Mode">
-                    <i data-lucide="moon"></i>
-                </button>
+                <button class="direction-toggle"><i data-lucide="languages"></i></button>
+                <button class="theme-toggle"><i data-lucide="moon"></i></button>
                 <a href="login.html" class="btn btn-primary">Client Dashboard</a>
-                <button class="mobile-menu-btn" aria-label="Menu">
-                    <i data-lucide="menu"></i>
-                </button>
+                <button class="mobile-menu-btn"><i data-lucide="menu"></i></button>
             </div>
         </div>
     </nav>
-
-    <!-- 1️⃣ Premium Hero Section (Facility + Trained Dogs) -->
+    <!-- 1ï¸âƒ£ Premium Hero Section (Facility + Trained Dogs) -->
     <section class="hero-premium">
         <div class="container text-center" style="max-width: 800px; margin: 0 auto;">
             <div style="display: inline-block; padding: 0.5rem 1rem; border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 2rem; letter-spacing: 1px; text-transform: uppercase;">
@@ -73,21 +75,19 @@
             <p style="font-size: 1.25rem; color: #cbd5e1; margin-bottom: 3rem; line-height: 1.8;">
                 Experience the gold standard in behavioral modification. Our 3-week immersive program transforms spirited dogs into calm, confident, and perfectly obedient companions.
             </p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <a href="facility.html" class="btn btn-primary" style="padding: 1rem 2.5rem;">Tour Our Facility</a>
-                <a href="programs.html" class="btn" style="background: white; color: var(--text-main); padding: 1rem 2.5rem;">Explore Programs</a>
+            <div class="btn-group center">
+                <a href="contact.html" class="btn btn-primary" style="padding: 1rem 2.5rem;">Book Free Evaluation</a>
+                <a href="programs.html" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 1rem 2.5rem;">Explore Programs</a>
             </div>
         </div>
     </section>
-
-    <!-- 2️⃣ Why Board & Train Works -->
+    <!-- 2ï¸âƒ£ Why Board & Train Works -->
     <section class="section">
         <div class="container grid-2">
             <div>
                 <span class="badge">The Advantage</span>
                 <h2>Why Board & Train Outperforms Weekly Classes</h2>
                 <p style="margin-bottom: 2rem;">Weekly classes leave the heavy lifting to you. Our immersive program surrounds your dog with professional consistency 24/7, breaking old habits and forging new ones in record time.</p>
-                
                 <div class="grid-2" style="gap: 1rem;">
                     <div class="card" style="padding: 1.5rem;">
                         <i data-lucide="shield" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
@@ -102,19 +102,17 @@
                 </div>
             </div>
             <div>
-                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=2000&auto=format&fit=crop" class="rounded-image" alt="Dog training session" style="height: 100%; object-fit: cover;">
+                <img src="assets/images/husky-blue-eyes.jpg" class="rounded-image" alt="Husky with blue eyes" style="height: 100%; object-fit: cover;">
             </div>
         </div>
     </section>
-
-    <!-- 3️⃣ Training Process Timeline -->
+    <!-- 3ï¸âƒ£ Training Process Timeline -->
     <section class="section section-alt">
         <div class="container">
             <div class="text-center" style="max-width: 700px; margin: 0 auto 4rem;">
                 <h2>The 21-Day Transformation</h2>
                 <p>Our structured timeline guarantees results through methodical, step-by-step advancement in distraction levels.</p>
             </div>
-            
             <div style="max-width: 800px; margin: 0 auto;">
                 <div class="process-step">
                     <h3>Week 1: Foundation & Focus</h3>
@@ -135,33 +133,26 @@
             </div>
         </div>
     </section>
-
-    <!-- 4️⃣ Facility Showcase -->
+    <!-- 4ï¸âƒ£ Facility Showcase -->
     <section class="section">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
-                <div style="max-width: 600px;">
+            <div style="display: flex; justify-content: center; margin-bottom: 5.5rem;">
+                <div style="max-width: 700px; text-align: center; margin: 0 auto;">
                     <h2>Five-Star Accommodations</h2>
                     <p>Your dog's comfort is non-negotiable. Our climate-controlled, sanitized facility is designed specifically to reduce stress and maximize learning.</p>
                 </div>
-                <div>
-                    <a href="facility.html" class="btn btn-secondary">Full Gallery</a>
-                </div>
             </div>
-            
-            <div class="grid-3">
-                <img src="https://images.unsplash.com/photo-1541364983171-a8ba01e9d7ce?q=80&w=1000&auto=format&fit=crop" alt="Indoor Training Area" class="rounded-image" style="height: 300px;">
-                <img src="https://images.unsplash.com/photo-1587300003388-59208cb962cb?q=80&w=1000&auto=format&fit=crop" alt="Dog resting in clean luxury kennel" class="rounded-image" style="height: 300px;">
-                <img src="https://images.unsplash.com/photo-1592398572111-d0076a596fac?q=80&w=1000&auto=format&fit=crop" alt="Outdoor grass play yard" class="rounded-image" style="height: 300px;">
+            <div class="grid-3" style="gap: 1.5rem;">
+                <img src="assets/images/dog-1.jpg" alt="Border Collie in snow" class="rounded-image" style="height: 480px; width: 100%; object-fit: cover; object-position: top;">
+                <img src="assets/images/dog-2.jpg" alt="Golden Retriever puppy" class="rounded-image" style="height: 480px; width: 100%; object-fit: cover; object-position: top;">
+                <img src="assets/images/dog-3.jpg" alt="Black Pitbull portrait" class="rounded-image" style="height: 480px; width: 100%; object-fit: cover; object-position: top;">
             </div>
         </div>
     </section>
-
-    <!-- 5️⃣ Before & After Success Stories -->
+    <!-- 5ï¸âƒ£ Before & After Success Stories -->
     <section class="section section-alt">
         <div class="container">
             <h2 class="text-center" style="margin-bottom: 3rem;">Proven Excellence</h2>
-            
             <div class="card" style="padding: 0; overflow: hidden; max-width: 1000px; margin: 0 auto;">
                 <div class="grid-2" style="gap: 0;">
                     <div>
@@ -171,14 +162,13 @@
                         <span style="color: var(--primary-color); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.875rem;">Behavior Modification</span>
                         <h3 style="font-size: 2rem;">"From Reactive to Relaxed"</h3>
                         <p style="margin-top: 1rem; font-style: italic;">"Cooper used to drag me down the street and bark aggressively at every bike or dog. After the 21-day program, I can walk him with two fingers on the leash. The trainer's updates via the dashboard were a lifeline. Truly a premium service."</p>
-                        <div style="margin-top: 2rem; font-weight: 600;">— Jessica Barnes, Golden Retriever Owner</div>
+                        <div style="margin-top: 2rem; font-weight: 600;">â€” Jessica Barnes, Golden Retriever Owner</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- 6️⃣ Final CTA – Enroll Your Dog -->
+    <!-- 6ï¸âƒ£ Final CTA â€“ Enroll Your Dog -->
     <section class="section">
         <div class="container">
             <div class="card text-center" style="background: var(--primary-color); color: white; padding: 5rem 2rem; border-radius: 20px;">
@@ -186,33 +176,47 @@
                 <p style="color: rgba(255,255,255,0.9); max-width: 600px; margin: 0 auto 2.5rem; font-size: 1.25rem;">
                     We carefully limit our intake to 10 dogs per month to guarantee personalized attention. Secure your dog's evaluation today.
                 </p>
-                <a href="contact.html" class="btn" style="background: white; color: var(--primary-color); padding: 1.25rem 3rem; font-size: 1.125rem;">Schedule Consultation</a>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="contact.html" class="btn" style="background: white; color: var(--primary-color); padding: 1.25rem 3rem; font-size: 1.125rem;">Book Free Evaluation</a>
+                    <a href="pricing.html" class="btn" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 1.25rem 3rem;">View Pricing Setup</a>
+                </div>
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <a href="index-2.html" class="brand" style="margin-bottom: 1rem;">
-                        <i data-lucide="shield-check"></i> K9 Mastery
+                    <a href="index.html" class="brand" style="margin-bottom: 1rem;">
+                        <i data-lucide="shield-check"></i> PawTrain
                     </a>
                     <p style="font-size: 0.95rem;">Premium dog training facility specializing in behavior modification and real-world obedience.</p>
+                    <div class="social-links" style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                        <a href="#" class="social-link" title="Instagram">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        </a>
+                        <a href="#" class="social-link" title="Facebook">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                        </a>
+                        <a href="#" class="social-link" title="X (Modern Twitter)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.464 -2.464l6.768 -6.768"/></svg>
+                        </a>
+                    </div>
                 </div>
                 <div>
                     <h4>Programs</h4>
                     <ul>
                         <li><a href="programs.html">Board & Train</a></li>
+                        <li><a href="programs.html#day-train">Day Training</a></li>
+                        <li><a href="programs.html#puppy">Puppy Camp</a></li>
                         <li><a href="pricing.html">View Pricing</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="facility.html">Our Facility</a></li>
+                        <li><a href="success-stories.html">Success Stories</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
@@ -220,16 +224,18 @@
                     <h4>Client Portal</h4>
                     <ul>
                         <li><a href="login.html">Owner Login</a></li>
+                        <li><a href="login.html">Trainer Portal</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 K9 Mastery. All rights reserved.</p>
+                <p>&copy; 2026 PawTrain. All rights reserved. <span style="display:inline-block; margin-left:10px;">Created for demonstration.</span></p>
             </div>
         </div>
     </footer>
-
     <!-- Scripts -->
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+

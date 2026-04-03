@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trainer Dashboard | K9 Mastery</title>
+    <title>Trainer Dashboard | PawTrain</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -12,6 +13,8 @@
         .dashboard-layout { display: flex; min-height: 100vh; }
         .sidebar { background: var(--bg-color); width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 50; }
         .main-content { flex: 1; margin-left: 280px; padding: 2rem; max-width: 1200px; }
+        [dir="rtl"] .sidebar { border-right: none; border-left: 1px solid var(--border-color); }
+        [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
         .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; transition: var(--transition); margin-bottom: 0.25rem; }
         .nav-item:hover, .nav-item.active { background: var(--bg-alt); color: var(--primary-color); }
         .dog-card { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--border-color); }
@@ -19,31 +22,28 @@
     </style>
 </head>
 <body>
-
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <a href="index.html" class="brand" style="margin-bottom: 2.5rem; padding-left: 0.5rem;"><i data-lucide="shield-check"></i> K9 Mastery</a>
-            
+            <a href="index.html" class="brand" style="margin-bottom: 2.5rem; padding-left: 0.5rem;"><i data-lucide="shield-check"></i> PawTrain</a>
             <div style="margin-bottom: 2rem; padding: 1rem; text-align: center;">
-                <div style="width: 64px; height: 64px; background: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold; margin: 0 auto 1rem;">MV</div>
+                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=128&auto=format&fit=crop" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; display: block;">
                 <h4 style="margin-bottom: 0;">Trainer Marcus</h4>
                 <span style="color: var(--text-muted); font-size: 0.875rem;">Head Trainer</span>
             </div>
-
             <nav style="flex-grow: 1;">
                 <a href="trainer-dashboard.html" class="nav-item active"><i data-lucide="users"></i> My Pack (4)</a>
                 <a href="#" class="nav-item"><i data-lucide="plus-square"></i> New Mass Update</a>
                 <a href="#" class="nav-item"><i data-lucide="calendar"></i> Schedule</a>
                 <a href="#" class="nav-item"><i data-lucide="message-square"></i> Client Messages <span style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; margin-left: auto;">3</span></a>
             </nav>
-
             <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                <button class="theme-toggle nav-item" style="width: 100%; text-align: left; background: none; border: none;"><i data-lucide="moon"></i> Toggle Theme</button>
-                <a href="login.html" class="nav-item"><i data-lucide="log-out"></i> Sign Out</a>
+            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
+                <button class="direction-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Direction"><i data-lucide="languages"></i></button>
+                <button class="theme-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Theme"><i data-lucide="moon"></i></button>
+                <a href="login.html" class="nav-item" style="flex: 1; justify-content: center; margin-bottom: 0;" title="Sign Out"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
-
         <!-- Main Content -->
         <main class="main-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
@@ -53,7 +53,6 @@
                 </div>
                 <button class="btn btn-primary"><i data-lucide="upload"></i> Upload Daily Media</button>
             </div>
-
             <!-- Active Dogs List -->
             <div class="card" style="padding: 0; overflow: hidden;">
                 <!-- Dog 1 -->
@@ -70,7 +69,6 @@
                         <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i data-lucide="camera" style="width: 16px; height: 16px;"></i></button>
                     </div>
                 </div>
-                
                 <!-- Dog 2 -->
                 <div class="dog-card">
                     <div style="display: flex; align-items: center; gap: 1rem;">
@@ -85,11 +83,10 @@
                         <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i data-lucide="camera" style="width: 16px; height: 16px;"></i></button>
                     </div>
                 </div>
-
                 <!-- Dog 3 -->
                 <div class="dog-card">
                     <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--border-color); display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--text-muted);">B</div>
+                        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=100&auto=format&fit=crop" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
                         <div>
                             <h4 style="margin-bottom: 0.25rem;">Bear <span class="badge" style="margin: 0; font-size: 0.7rem; padding: 0.1rem 0.5rem; background: #bbf7d0; color: #166534; border-color: #86efac;">Day 28</span></h4>
                             <div style="font-size: 0.875rem; color: var(--text-muted);">Owner: Emily D. • Rehab Track</div>
@@ -101,7 +98,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Quick Update Form -->
             <div style="margin-top: 3rem;">
                 <h3 style="margin-bottom: 1.5rem;">Quick Text Update</h3>
@@ -125,7 +121,7 @@
             </div>
         </main>
     </div>
-
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+
