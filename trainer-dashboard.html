@@ -11,17 +11,52 @@
     <style>
         body { background-color: var(--bg-alt); padding-top: 0; }
         .dashboard-layout { display: flex; min-height: 100vh; }
-        .sidebar { background: var(--bg-color); width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 50; }
-        .main-content { flex: 1; margin-left: 280px; padding: 2rem; max-width: 1200px; }
+        .sidebar { background: var(--bg-color); width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 1001; transition: transform 0.3s ease; }
+        .main-content { flex: 1; margin-left: 280px; padding: 2rem; max-width: 1200px; transition: margin 0.3s ease; }
         [dir="rtl"] .sidebar { border-right: none; border-left: 1px solid var(--border-color); }
         [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
         .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; transition: var(--transition); margin-bottom: 0.25rem; }
         .nav-item:hover, .nav-item.active { background: var(--bg-alt); color: var(--primary-color); }
-        .dog-card { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--border-color); }
+        .dog-card { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem; }
         .dog-card:last-child { border-bottom: none; }
+
+        .mobile-header { display: none; background: var(--bg-color); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; align-items: center; justify-content: space-between; width: 100%; }
+        .menu-toggle { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 260px; }
+            .sidebar.active { transform: translateX(0); }
+            [dir="rtl"] .sidebar { transform: translateX(100%); }
+            [dir="rtl"] .sidebar.active { transform: translateX(0); }
+            
+            .main-content { margin-left: 0; padding: 1.5rem; }
+            [dir="rtl"] .main-content { margin-right: 0; }
+            .mobile-header { display: flex; }
+            .sidebar-overlay.active { display: block; opacity: 1; }
+        }
+
+        @media (max-width: 640px) {
+            .dog-card { flex-direction: column; align-items: flex-start; text-align: left; }
+            .dog-card > div:last-child { width: 100%; justify-content: space-between; margin-top: 0.5rem; }
+            .main-content { padding: 1rem; }
+            h1 { font-size: 1.75rem; }
+            .btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
-<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <i data-lucide="menu"></i>
+        </button>
+        <a href="index.html" class="brand" style="margin-bottom: 0;"><i data-lucide="shield-check"></i> PawTrain</a>
+        <div style="width: 24px;"></div> <!-- Spacer -->
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -46,7 +81,7 @@
         </aside>
         <!-- Main Content -->
         <main class="main-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <div>
                     <h1 style="margin-bottom: 0.25rem;">Active Pack</h1>
                     <p style="color: var(--text-muted);">You currently have 4 dogs in training.</p>
@@ -126,6 +161,33 @@
         <i data-lucide="chevron-up"></i>
     </button>
     <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                const isOpened = sidebar.classList.contains('active');
+                menuToggle.querySelector('i').setAttribute('data-lucide', isOpened ? 'x' : 'menu');
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            if (menuToggle && sidebar && overlay) {
+                menuToggle.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
+            }
+
+            // Close sidebar on window resize if it's open and moving to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992 && sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 

@@ -24,18 +24,45 @@
         .timeline-item { margin-bottom: 2rem; position: relative; }
         .timeline-item::before { content: ''; position: absolute; left: -29px; top: 0; width: 16px; height: 16px; background: var(--white); border: 2px solid var(--primary-color); border-radius: 50%; }
         [dir="rtl"] .timeline-item::before { left: auto; right: -29px; }
-        @media (max-width: 900px) {
-            .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
-            [dir="rtl"] .sidebar { transform: translateX(100%); }
+
+        .mobile-header { display: none; background: var(--bg-color); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; align-items: center; justify-content: space-between; width: 100%; }
+        .menu-toggle { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 260px; z-index: 1001; transition: transform 0.3s ease; }
             .sidebar.active { transform: translateX(0); }
+            [dir="rtl"] .sidebar { transform: translateX(100%); }
             [dir="rtl"] .sidebar.active { transform: translateX(0); }
-            .main-content { margin-left: 0; padding: 1rem; }
+            
+            .main-content { margin-left: 0; padding: 1.5rem; }
             [dir="rtl"] .main-content { margin-right: 0; }
-            .dash-header-mobile { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--bg-color); border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; }
+            .mobile-header { display: flex; }
+            .sidebar-overlay.active { display: block; opacity: 1; }
+            .content-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 { grid-template-columns: 1fr; }
+            .main-content { padding: 1rem; }
+            h1 { font-size: 1.75rem; }
         }
     </style>
 </head>
-<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <i data-lucide="menu"></i>
+        </button>
+        <a href="index.html" class="brand" style="margin-bottom: 0;"><i data-lucide="shield-check"></i> PawTrain</a>
+        <div style="width: 24px;"></div> <!-- Spacer -->
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <div class="dashboard-layout">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -61,11 +88,7 @@
         </aside>
         <!-- Main Content -->
         <main class="main-content">
-            <div class="dash-header-mobile" style="display: none;">
-                <a href="index.html" class="brand" style="font-size: 1.25rem;"><i data-lucide="shield-check"></i> PawTrain</a>
-                <button class="mobile-dash-btn" style="color: var(--text-main);"><i data-lucide="menu"></i></button>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <div>
                     <h1 style="margin-bottom: 0.25rem;">Welcome back, Sarah</h1>
                     <p style="color: var(--text-muted);">Here's your daily update for Rocky.</p>
@@ -95,7 +118,7 @@
                 </div>
             </div>
             <!-- Content Grid -->
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+            <div class="content-grid">
                 <!-- Feed -->
                 <div>
                     <h3 style="margin-bottom: 1.5rem;">Latest Training Updates</h3>
@@ -155,23 +178,27 @@
             </div>
         </main>
     </div>
+    <script src="assets/js/script.js"></script>
     <script>
-        // Inline script for specifically dashboard mobile toggle
         document.addEventListener('DOMContentLoaded', () => {
-            const mobileBtn = document.querySelector('.mobile-dash-btn');
+            const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.querySelector('.sidebar');
-            if(mobileBtn && sidebar) {
-                mobileBtn.addEventListener('click', () => {
-                    sidebar.classList.toggle('active');
-                });
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                const isOpened = sidebar.classList.contains('active');
+                menuToggle.querySelector('i').setAttribute('data-lucide', isOpened ? 'x' : 'menu');
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            if (menuToggle && sidebar && overlay) {
+                menuToggle.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
             }
         });
     </script>
-    <!-- Scroll to Top -->
-    <button id="scrollToTop" class="scroll-top" aria-label="Scroll to top">
-        <i data-lucide="chevron-up"></i>
-    </button>
-    <script src="assets/js/script.js"></script>
 </body>
 </html>
 

@@ -559,9 +559,30 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
   .grid-2 { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--spacing-md); }
   
-  /* Center align content on tablets and below */
-  .section, .container, .hero-content, [class^="grid-"] > div, .card {
+  /* Properly center card and hero contents using flexbox */
+  .card, .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+  }
+
+  /* Center brand logo in login/signup pages */
+  .auth-card .brand {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+  }
+
+  .footer-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer .brand, .footer .social-links {
+    justify-content: center;
   }
   
   .btn-group, .rating-group {
@@ -569,24 +590,31 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
   }
 
   .card ul {
-    display: table;
-    margin: 0 auto 2rem;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0 2.5rem;
+    padding: 0;
   }
 
   .card ul li {
-    justify-content: flex-start;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
   }
-  
-  /* Ensure icons and other small elements are centered */
-  [data-lucide], .stat-icon, .badge {
+
+  .stat-icon, .badge {
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .text-left {
     text-align: center !important;
   }
+
   
   .process-step {
     padding-left: 0;
