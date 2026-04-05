@@ -109,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollToTopBtn = document.getElementById('scrollToTop');
     if (scrollToTopBtn) {
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPos > 100) {
                 scrollToTopBtn.classList.add('show');
             } else {
                 scrollToTopBtn.classList.remove('show');
