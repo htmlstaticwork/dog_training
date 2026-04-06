@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Messages | PawTrain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: var(--bg-alt); padding-top: 0; }
+        .dashboard-layout { display: flex; min-height: 100vh; }
+        .sidebar { background: var(--bg-color); width: 280px; border-right: 1px solid var(--border-color); padding: 1.5rem; display: flex; flex-direction: column; position: fixed; height: 100vh; overflow-y: auto; z-index: 1001; transition: transform 0.3s ease; }
+        .main-content { flex: 1; margin-left: 280px; padding: 2rem; max-width: 1200px; transition: margin 0.3s ease; height: 100vh; display: flex; flex-direction: column; }
+        [dir="rtl"] .sidebar { border-right: none; border-left: 1px solid var(--border-color); }
+        [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
+        .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; transition: var(--transition); margin-bottom: 0.25rem; }
+        .nav-item:hover, .nav-item.active { background: var(--bg-alt); color: var(--primary-color); }
+
+        .mobile-header { display: none; background: var(--bg-color); padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; align-items: center; justify-content: space-between; width: 100%; }
+        .menu-toggle { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; transition: opacity 0.3s ease; }
+        
+        .chat-container { display: flex; flex: 1; min-height: 500px; height: auto; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-color); overflow: hidden; margin-bottom: 1rem; }
+        .contacts-list { width: 320px; border-right: 1px solid var(--border-color); display: flex; flex-direction: column; background: var(--bg-color); }
+        [dir="rtl"] .contacts-list { border-right: none; border-left: 1px solid var(--border-color); }
+        .chat-view { flex: 1; display: flex; flex-direction: column; background: var(--bg-color); }
+
+        .contact-item { padding: 1rem; border-bottom: 1px solid var(--border-color); cursor: pointer; transition: background-color 0.2s; }
+        .contact-item:hover { background: var(--bg-alt); }
+        .contact-item.active { background: var(--bg-alt); border-left: 3px solid var(--primary-color); }
+        [dir="rtl"] .contact-item.active { border-left: none; border-right: 3px solid var(--primary-color); }
+
+        .message-bubble { padding: 1rem; border-radius: var(--radius-md); max-width: 80%; margin-bottom: 1rem; }
+        .message-bubble.received { align-self: flex-start; background: var(--bg-alt); border: 1px solid var(--border-color); border-bottom-left-radius: 0; }
+        [dir="rtl"] .message-bubble.received { border-bottom-left-radius: var(--radius-md); border-bottom-right-radius: 0; }
+        .message-bubble.sent { align-self: flex-end; background: var(--primary-color); color: white; border-bottom-right-radius: 0; }
+        [dir="rtl"] .message-bubble.sent { border-bottom-right-radius: var(--radius-md); border-bottom-left-radius: 0; }
+
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); width: 260px; }
+            .sidebar.active { transform: translateX(0); }
+            [dir="rtl"] .sidebar { transform: translateX(100%); }
+            [dir="rtl"] .sidebar.active { transform: translateX(0); }
+            
+            .main-content { margin-left: 0; padding: 1rem; height: calc(100dvh - 60px); }
+            [dir="rtl"] .main-content { margin-right: 0; }
+            .mobile-header { display: flex; }
+            .sidebar-overlay.active { display: block; opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 0.5rem; }
+            .content-header { padding: 0.5rem; margin-bottom: 0.5rem !important; }
+            .chat-container { flex-direction: column; min-height: 0; border: 1px solid var(--border-color); border-radius: var(--radius-sm); margin-bottom: 0; }
+            .contacts-list { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); max-height: 150px; flex-shrink: 0; }
+            .chat-view { flex: 1; min-height: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+            <i data-lucide="menu"></i>
+        </button>
+        <a href="index.html" class="brand" style="margin-bottom: 0;"><i data-lucide="shield-check"></i> PawTrain</a>
+        <div style="width: 24px;"></div> <!-- Spacer -->
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="brand" style="margin-bottom: 2.5rem; padding-left: 0.5rem;"><i data-lucide="shield-check"></i> PawTrain</a>
+            <div style="margin-bottom: 2rem; padding: 1rem; text-align: center;">
+                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=128&auto=format&fit=crop" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; display: block;" alt="Trainer Marcus">
+                <h4 style="margin-bottom: 0;">Trainer Marcus</h4>
+                <span style="color: var(--text-muted); font-size: 0.875rem;">Head Trainer</span>
+            </div>
+            <nav style="flex-grow: 1;">
+                <a href="trainer-dashboard.html" class="nav-item"><i data-lucide="users"></i> My Pack (4)</a>
+                <a href="mass-update.html" class="nav-item"><i data-lucide="plus-square"></i> New Mass Update</a>
+                <a href="schedule.html" class="nav-item"><i data-lucide="calendar"></i> Schedule</a>
+                <a href="messages.html" class="nav-item active"><i data-lucide="message-square"></i> Client Messages <span style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; margin-left: auto;">3</span></a>
+            </nav>
+            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
+                <button class="direction-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Direction"><i data-lucide="languages"></i></button>
+                <button class="theme-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Theme"><i data-lucide="moon"></i></button>
+                <a href="login.html" class="nav-item" style="flex: 1; justify-content: center; margin-bottom: 0;" title="Sign Out"><i data-lucide="log-out"></i></a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-shrink: 0;">
+                <div>
+                    <h1 style="margin-bottom: 0.25rem;">Client Messages</h1>
+                    <p style="color: var(--text-muted);">You have 3 unread messages.</p>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <!-- Contacts List -->
+                <div class="contacts-list">
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color);">
+                        <div style="position: relative;">
+                            <input type="text" placeholder="Search messages..." style="width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none; background: transparent; color: var(--text-main);">
+                            <i data-lucide="search" style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--text-muted);"></i>
+                        </div>
+                    </div>
+                    <div style="flex: 1; overflow-y: auto;">
+                        <div class="contact-item active">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <h4 style="margin: 0; font-size: 1rem;">Sarah T. (Rocky)</h4>
+                                <span style="font-size: 0.75rem; color: var(--primary-color); font-weight: 600;">10:30 AM</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="margin: 0; font-size: 0.875rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">Thanks for the update! He looks so happy.</p>
+                                <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <h4 style="margin: 0; font-size: 1rem;">Mike R. (Luna)</h4>
+                                <span style="font-size: 0.75rem; color: var(--primary-color); font-weight: 600;">Yesterday</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="margin: 0; font-size: 0.875rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">Will she need a different collar?</p>
+                                <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                                <h4 style="margin: 0; font-size: 1rem;">Emily D. (Bear)</h4>
+                                <span style="font-size: 0.75rem; color: var(--primary-color); font-weight: 600;">Tue</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="margin: 0; font-size: 0.875rem; color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">I'll be bringing some extra treats tomorrow.</p>
+                                <span style="width: 8px; height: 8px; background: #ef4444; border-radius: 50%; display: inline-block; flex-shrink: 0;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat View -->
+                <div class="chat-view">
+                    <!-- Chat Header -->
+                    <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 1rem;">
+                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=40&auto=format&fit=crop" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;" alt="Rocky">
+                        <div>
+                            <h4 style="margin: 0;">Sarah T.</h4>
+                            <span style="font-size: 0.75rem; color: var(--text-muted);">Owner of Rocky</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Messages -->
+                    <div style="flex: 1; padding: 1.5rem; overflow-y: auto; display: flex; flex-direction: column;">
+                        <div class="message-bubble received">
+                            <p style="margin: 0;">Hi Marcus, how is Rocky doing with his crate training today?</p>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 0.5rem; text-align: right;">9:15 AM</span>
+                        </div>
+                        
+                        <div class="message-bubble sent">
+                            <p style="margin: 0;">He is doing fantastic! No whining at all this morning. I uploaded a video to his profile.</p>
+                            <span style="font-size: 0.7rem; color: rgba(255,255,255,0.8); display: block; margin-top: 0.5rem; text-align: right;">9:45 AM</span>
+                        </div>
+                        
+                        <div class="message-bubble received">
+                            <p style="margin: 0;">Thanks for the update! He looks so happy.</p>
+                            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-top: 0.5rem; text-align: right;">10:30 AM</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Input -->
+                    <div style="padding: 1rem; border-top: 1px solid var(--border-color);">
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <button style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.5rem; border-radius: 50%; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='var(--bg-alt)'" onmouseout="this.style.backgroundColor='transparent'"><i data-lucide="paperclip"></i></button>
+                            <input type="text" placeholder="Type a message..." style="flex: 1; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none; background: var(--bg-color); color: var(--text-main);">
+                            <button class="btn btn-primary" style="padding: 0.75rem 1rem;"><i data-lucide="send"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button id="scrollToTop" class="scroll-top" aria-label="Scroll to top">
+        <i data-lucide="chevron-up"></i>
+    </button>
+    
+    <script src="assets/js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                const isOpened = sidebar.classList.contains('active');
+                menuToggle.querySelector('i').setAttribute('data-lucide', isOpened ? 'x' : 'menu');
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            if (menuToggle && sidebar && overlay) {
+                menuToggle.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
+            }
+
+            // Close sidebar on window resize if it's open and moving to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992 && sidebar.classList.contains('active')) {
+                    toggleSidebar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

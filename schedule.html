@@ -4,7 +4,7 @@
     <link rel="icon" href="favicon.svg" sizes="any" type="image/svg+xml">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trainer Dashboard | PawTrain</title>
+    <title>Schedule | PawTrain</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -17,6 +17,7 @@
         [dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
         .nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: var(--radius-md); color: var(--text-muted); font-weight: 500; transition: var(--transition); margin-bottom: 0.25rem; }
         .nav-item:hover, .nav-item.active { background: var(--bg-alt); color: var(--primary-color); }
+        
         .dog-card { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem; }
         .dog-card:last-child { border-bottom: none; }
 
@@ -38,13 +39,14 @@
 
         @media (max-width: 640px) {
             .dog-card { flex-direction: column; align-items: flex-start; text-align: left; }
-            .dog-card > div:last-child { width: 100%; justify-content: space-between; margin-top: 0.5rem; }
+            .dog-card > div:last-child { width: 100%; display: flex; justify-content: center; margin-top: 0.5rem; }
             .main-content { padding: 1rem; }
             h1 { font-size: 1.75rem; }
-            .btn { width: 100%; justify-content: center; }
+            .header-info { flex-direction: column; align-items: stretch; gap: 1rem; }
         }
     </style>
 </head>
+<body>
     <!-- Mobile Header -->
     <header class="mobile-header">
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
@@ -62,104 +64,99 @@
         <aside class="sidebar">
             <a href="index.html" class="brand" style="margin-bottom: 2.5rem; padding-left: 0.5rem;"><i data-lucide="shield-check"></i> PawTrain</a>
             <div style="margin-bottom: 2rem; padding: 1rem; text-align: center;">
-                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=128&auto=format&fit=crop" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; display: block;">
+                <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=128&auto=format&fit=crop" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; display: block;" alt="Trainer Marcus">
                 <h4 style="margin-bottom: 0;">Trainer Marcus</h4>
                 <span style="color: var(--text-muted); font-size: 0.875rem;">Head Trainer</span>
             </div>
             <nav style="flex-grow: 1;">
-                <a href="trainer-dashboard.html" class="nav-item active"><i data-lucide="users"></i> My Pack (4)</a>
+                <a href="trainer-dashboard.html" class="nav-item"><i data-lucide="users"></i> My Pack (4)</a>
                 <a href="mass-update.html" class="nav-item"><i data-lucide="plus-square"></i> New Mass Update</a>
-                <a href="schedule.html" class="nav-item"><i data-lucide="calendar"></i> Schedule</a>
+                <a href="schedule.html" class="nav-item active"><i data-lucide="calendar"></i> Schedule</a>
                 <a href="messages.html" class="nav-item"><i data-lucide="message-square"></i> Client Messages <span style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; margin-left: auto;">3</span></a>
             </nav>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color);">
             <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
                 <button class="direction-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Direction"><i data-lucide="languages"></i></button>
                 <button class="theme-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Theme"><i data-lucide="moon"></i></button>
                 <a href="login.html" class="nav-item" style="flex: 1; justify-content: center; margin-bottom: 0;" title="Sign Out"><i data-lucide="log-out"></i></a>
             </div>
         </aside>
+
         <!-- Main Content -->
         <main class="main-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <div class="header-info" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
                 <div>
-                    <h1 style="margin-bottom: 0.25rem;">Active Pack</h1>
-                    <p style="color: var(--text-muted);">You currently have 4 dogs in training.</p>
+                    <h1 style="margin-bottom: 0.25rem;">Schedule</h1>
+                    <p style="color: var(--text-muted);">Manage your upcoming training sessions and appointments.</p>
                 </div>
-                <button class="btn btn-primary"><i data-lucide="upload"></i> Upload Daily Media</button>
+                <button class="btn btn-primary"><i data-lucide="plus"></i> New Event</button>
             </div>
-            <!-- Active Dogs List -->
+            
             <div class="card" style="padding: 0; overflow: hidden;">
-                <!-- Dog 1 -->
+                <!-- Schedule dates items -->
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); background: var(--bg-alt);">
+                    <h4 style="margin: 0;">Today, April 6</h4>
+                </div>
+                
                 <div class="dog-card">
                     <div style="display: flex; align-items: center; gap: 1rem;">
-                        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?q=80&w=100&auto=format&fit=crop" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                        <div style="padding: 0.5rem; background: #e0e7ff; color: #4338ca; border-radius: var(--radius-sm); text-align: center; min-width: 80px;">
+                            <div style="font-weight: 700;">10:00 AM</div>
+                            <div style="font-size: 0.75rem;">1 hr</div>
+                        </div>
                         <div>
-                            <h4 style="margin-bottom: 0.25rem;">Rocky <span class="badge" style="margin: 0; font-size: 0.7rem; padding: 0.1rem 0.5rem; background: #fef08a; color: #854d0e; border-color: #fde047;">Day 14</span></h4>
-                            <div style="font-size: 0.875rem; color: var(--text-muted);">Owner: Sarah T. • Standard B&T</div>
+                            <h4 style="margin-bottom: 0.25rem;">Rocky - Board & Train</h4>
+                            <div style="font-size: 0.875rem; color: var(--text-muted);"><i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: text-bottom;"></i> Main Facility</div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a href="dog-progress.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log Progress</a>
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i data-lucide="camera" style="width: 16px; height: 16px;"></i></button>
+                    <div>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View Details</button>
                     </div>
                 </div>
-                <!-- Dog 2 -->
+                
                 <div class="dog-card">
                     <div style="display: flex; align-items: center; gap: 1rem;">
-                        <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=100&auto=format&fit=crop" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                        <div style="padding: 0.5rem; background: #fee2e2; color: #b91c1c; border-radius: var(--radius-sm); text-align: center; min-width: 80px;">
+                            <div style="font-weight: 700;">1:00 PM</div>
+                            <div style="font-size: 0.75rem;">45 min</div>
+                        </div>
                         <div>
-                            <h4 style="margin-bottom: 0.25rem;">Luna <span class="badge" style="margin: 0; font-size: 0.7rem; padding: 0.1rem 0.5rem; background: #fed7aa; color: #9a3412; border-color: #fdba74;">Day 5</span></h4>
-                            <div style="font-size: 0.875rem; color: var(--text-muted);">Owner: Mike R. • Puppy Camp</div>
+                            <h4 style="margin-bottom: 0.25rem;">Luna - Evaluation</h4>
+                            <div style="font-size: 0.875rem; color: var(--text-muted);"><i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: text-bottom;"></i> 123 Main St (Client Home)</div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log Progress</a>
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i data-lucide="camera" style="width: 16px; height: 16px;"></i></button>
+                    <div>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View Details</button>
                     </div>
                 </div>
-                <!-- Dog 3 -->
+                
+                <div style="padding: 1rem; border-bottom: 1px solid var(--border-color); background: var(--bg-alt);">
+                    <h4 style="margin: 0;">Tomorrow, April 7</h4>
+                </div>
+                
                 <div class="dog-card">
                     <div style="display: flex; align-items: center; gap: 1rem;">
-                        <img src="https://images.unsplash.com/photo-1534361960057-19889db9621e?q=80&w=100&auto=format&fit=crop" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+                        <div style="padding: 0.5rem; background: #dcfce7; color: #15803d; border-radius: var(--radius-sm); text-align: center; min-width: 80px;">
+                            <div style="font-weight: 700;">9:00 AM</div>
+                            <div style="font-size: 0.75rem;">1 hr</div>
+                        </div>
                         <div>
-                            <h4 style="margin-bottom: 0.25rem;">Bear <span class="badge" style="margin: 0; font-size: 0.7rem; padding: 0.1rem 0.5rem; background: #bbf7d0; color: #166534; border-color: #86efac;">Day 28</span></h4>
-                            <div style="font-size: 0.875rem; color: var(--text-muted);">Owner: Emily D. • Rehab Track</div>
+                            <h4 style="margin-bottom: 0.25rem;">Bear - Private Lesson</h4>
+                            <div style="font-size: 0.875rem; color: var(--text-muted);"><i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: text-bottom;"></i> City Park</div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <a href="#" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Log Progress</a>
-                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;"><i data-lucide="camera" style="width: 16px; height: 16px;"></i></button>
+                    <div>
+                        <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">View Details</button>
                     </div>
-                </div>
-            </div>
-            <!-- Quick Update Form -->
-            <div style="margin-top: 3rem;">
-                <h3 style="margin-bottom: 1.5rem;">Quick Text Update</h3>
-                <div class="card">
-                    <form>
-                        <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Select Dog</label>
-                            <select style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;">
-                                <option>Rocky</option>
-                                <option>Luna</option>
-                                <option>Bear</option>
-                            </select>
-                        </div>
-                        <div style="margin-bottom: 1rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message to Owner</label>
-                            <textarea rows="4" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); outline: none;"></textarea>
-                        </div>
-                        <button type="button" class="btn btn-primary">Send Update</button>
-                    </form>
                 </div>
             </div>
         </main>
     </div>
+
     <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-top" aria-label="Scroll to top">
         <i data-lucide="chevron-up"></i>
     </button>
+    
     <script src="assets/js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -190,5 +187,3 @@
     </script>
 </body>
 </html>
-
-
