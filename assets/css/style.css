@@ -27,15 +27,15 @@
   --primary-color: #3b82f6;
   --primary-dark: #60a5fa;
   --secondary-color: #f8fafc;
-  --bg-color: #0f172a;
-  --bg-alt: #1e293b;
+  --bg-color: #000000;
+  --bg-alt: #0a0a0a;
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
-  --border-color: #334155;
-  --white: #1e293b;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.2);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.3);
+  --border-color: #1e293b;
+  --white: #050505;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
 }
 
 /* -- RTL Support -- */
@@ -179,16 +179,20 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
   justify-content: center;
 }
 
-.card-cta {
-  background: var(--secondary-color);
+.card.card-cta {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #1e293b 100%);
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: var(--spacing-xl) var(--spacing-md);
   text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .card-cta h2, .card-cta p {
   color: white;
+  position: relative;
+  z-index: 2;
 }
 
 .card-cta .btn-secondary-outline {
@@ -197,9 +201,20 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="dark"] .card-cta {
-  background: var(--bg-alt);
-  color: var(--text-main);
+.card-cta::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+  z-index: 1;
+}
+
+[data-theme="dark"] .card.card-cta {
+  background: linear-gradient(135deg, #050505 0%, #111827 100%);
+  border-color: var(--border-color);
 }
 
 [data-theme="dark"] .card-cta h2, 
@@ -208,7 +223,7 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
 }
 
 [data-theme="dark"] .card-cta .btn-secondary-outline {
-  background: var(--bg-color);
+  background: var(--bg-alt);
   color: var(--text-main);
   border: 1px solid var(--border-color);
 }

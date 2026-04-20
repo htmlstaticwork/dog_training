@@ -22,16 +22,21 @@
             text-align: center;
         }
         .hero-premium h1, .hero-premium h2, .hero-premium h3, .hero-premium p { color: white; }
-        .process-step { border-left: 2px solid var(--primary-color); padding-left: 2rem; position: relative; margin-bottom: 3rem; }
-        .process-step::before {
-            content: '';
-            position: absolute;
-            left: -9px;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            background: var(--primary-color);
-            border-radius: 50%;
+        
+        @media (min-width: 1025px) {
+            .process-step { border-left: 2px solid var(--primary-color); padding-left: 2.5rem; position: relative; padding-bottom: 4rem; }
+            .process-step::before {
+                content: '';
+                position: absolute;
+                left: -9px;
+                top: 0.4rem;
+                width: 16px;
+                height: 16px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                z-index: 2;
+            }
+            .process-step:last-child { border-left-color: transparent; padding-bottom: 2rem; }
         }
     </style>
 </head>
@@ -59,7 +64,7 @@
                 </li>
             </ul>
             <div class="nav-actions">
-                <button class="direction-toggle"><i data-lucide="languages"></i></button>
+                <button class="direction-toggle"><i data-lucide="arrow-right-left"></i></button>
                 <button class="theme-toggle"><i data-lucide="moon"></i></button>
                 <a href="login.html" class="btn btn-outline">Login</a>
                 <a href="trainer-dashboard.html" class="btn btn-primary">Dashboard</a>
@@ -124,12 +129,8 @@
                     <h3>Week 2: Proofing & Distraction</h3>
                     <p>Commands are tested in our outdoor training yards around other dogs, noises, and movement to build reliability under pressure.</p>
                 </div>
-                <div class="process-step" style="border-left: 2px solid transparent;">
-                    <h3 style="position: relative;">
-                        <!-- Custom dot for the last item -->
-                        <span style="position: absolute; left: -2.7rem; top: 0; width: 16px; height: 16px; background: var(--primary-color); border-radius: 50%;"></span>
-                        Week 3: Real-World Application
-                    </h3>
+                <div class="process-step">
+                    <h3>Week 3: Real-World Application</h3>
                     <p>Field trips to parks, home improvement stores, and busy trails ensure the training transfers to your actual lifestyle. Followed by owner transfer sessions.</p>
                 </div>
             </div>

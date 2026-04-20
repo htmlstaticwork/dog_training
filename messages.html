@@ -58,6 +58,10 @@
             .contacts-list { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); max-height: 150px; flex-shrink: 0; }
             .chat-view { flex: 1; min-height: 0; }
         }
+        
+        .dashboard-controls { position: absolute; top: 1.5rem; right: 2rem; display: flex; gap: 0.5rem; z-index: 100; }
+        [dir="rtl"] .dashboard-controls { right: auto; left: 2rem; }
+        @media (max-width: 992px) { .dashboard-controls { display: none; } }
     </style>
 </head>
 <body>
@@ -88,19 +92,21 @@
                 <a href="schedule.html" class="nav-item"><i data-lucide="calendar"></i> Schedule</a>
                 <a href="messages.html" class="nav-item active"><i data-lucide="message-square"></i> Client Messages <span style="background: #ef4444; color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.75rem; margin-left: auto;">3</span></a>
             </nav>
-            <div style="padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; gap: 0.5rem;">
-                <button class="direction-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Direction"><i data-lucide="languages"></i></button>
-                <button class="theme-toggle nav-item" style="flex: 1; justify-content: center; background: none; border: none; margin-bottom: 0;" title="Toggle Theme"><i data-lucide="moon"></i></button>
-                <a href="login.html" class="nav-item" style="flex: 1; justify-content: center; margin-bottom: 0;" title="Sign Out"><i data-lucide="log-out"></i></a>
+            <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                <a href="login.html" class="nav-item" title="Sign Out" style="margin-bottom: 0;"><i data-lucide="log-out"></i> Logout</a>
             </div>
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-shrink: 0;">
+        <main class="main-content" style="position: relative;">
+            <div class="dashboard-controls">
+                <button class="direction-toggle nav-item" style="background: none; border: none; cursor: pointer; padding: 0.5rem;" title="Toggle Direction"><i data-lucide="arrow-right-left"></i></button>
+                <button class="theme-toggle nav-item" style="background: none; border: none; cursor: pointer; padding: 0.5rem;" title="Toggle Theme"><i data-lucide="moon"></i></button>
+            </div>
+            <div class="content-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-shrink: 0;">
                 <div>
-                    <h1 style="margin-bottom: 0.25rem;">Client Messages</h1>
-                    <p style="color: var(--text-muted);">You have 3 unread messages.</p>
+                    <h1 style="margin-bottom: 0.5rem;">Welcome back, Trainer Marcus!</h1>
+                    <p style="color: var(--text-muted); font-size: 1.125rem;">You have new messages from your pack parents.</p>
                 </div>
             </div>
 
