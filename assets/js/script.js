@@ -73,14 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateDirIcons(dir) {
-        dirToggle.forEach(btn => {
-            const icon = btn.querySelector('i');
-            if (icon) {
-                // We use 'languages' as a generic RTL icon, or could toggle based on state
-                icon.setAttribute('data-lucide', 'languages');
-            }
-        });
-        if (typeof lucide !== 'undefined') lucide.createIcons();
+        // RTL toggle now uses text "RTL" instead of icons
     }
 
     // Password Visibility Toggle

@@ -28,14 +28,14 @@
   --primary-dark: #60a5fa;
   --secondary-color: #f8fafc;
   --bg-color: #000000;
-  --bg-alt: #0a0a0a;
+  --bg-alt: #000000;
   --text-main: #f1f5f9;
   --text-muted: #94a3b8;
-  --border-color: #1e293b;
-  --white: #050505;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
-  --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
-  --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+  --border-color: #2d3748;
+  --white: #000000;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
 }
 
 /* -- RTL Support -- */
@@ -213,7 +213,7 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
 }
 
 [data-theme="dark"] .card.card-cta {
-  background: linear-gradient(135deg, #050505 0%, #111827 100%);
+  background: linear-gradient(135deg, #000000 0%, #111827 100%);
   border-color: var(--border-color);
 }
 
@@ -264,11 +264,12 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
 
 .btn-outline {
   background: transparent;
-  border: 1.5px solid var(--border-color);
-  color: var(--text-main);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
 }
 .btn-outline:hover {
-  background: var(--bg-alt);
+  background: var(--primary-color);
+  color: white;
   border-color: var(--primary-color);
 }
 
@@ -429,6 +430,14 @@ p { margin-bottom: var(--spacing-sm); color: var(--text-muted); font-size: 1.125
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+}
+
+.direction-toggle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.5px;
 }
 
 .direction-toggle:hover, .theme-toggle:hover { background-color: var(--bg-alt); }
